@@ -17,6 +17,7 @@ class TimesheetsController < ApplicationController
   # GET /timesheet.json
   # GET /timesheet.csv
   def show
+
     sort_init(@timesheet.query.sort_criteria.empty? ? [['spent_on', 'desc']] : @query.sort_criteria)
     sort_update(@timesheet.query.sortable_columns)
 
@@ -68,6 +69,8 @@ class TimesheetsController < ApplicationController
       # retrieve from session
       @timesheet = Timesheet.load_from_session(session, SESSION_KEY)
     end
+
+    @query = @timesheet.query
   end
 
   def save_timesheet_to_session

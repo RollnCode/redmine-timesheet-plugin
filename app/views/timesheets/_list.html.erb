@@ -1,3 +1,6 @@
+<% query_options = nil unless defined?(query_options) %>
+<% query_options ||= {} %>
+
 <%= form_tag({}) do -%>
 <%= hidden_field_tag 'back_url', url_for(params), :id => nil %>
 <div class="autoscroll">
@@ -9,7 +12,7 @@
               :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
       </th>
       <% query.inline_columns.each do |column| %>
-        <%= column_header(column) %>
+        <%= column_header(query, column, query_options) %>
       <% end %>
     </tr>
   </thead>
@@ -42,5 +45,3 @@
 </table>
 </div>
 <% end -%>
-
-<%= context_menu time_entries_context_menu_path %>
